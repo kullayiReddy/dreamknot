@@ -10,14 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as ContributionIdRouteImport } from './routes/contribution.$id'
 import { Route as WeddingsSlugRouteImport } from './routes/weddings/$slug'
+import { Route as AuthenticatedManageWeddingIdRouteImport } from './routes/_authenticated/manage.$weddingId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -35,53 +49,108 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ContributionIdRoute = ContributionIdRouteImport.update({
+  id: '/contribution/$id',
+  path: '/contribution/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeddingsSlugRoute = WeddingsSlugRouteImport.update({
   id: '/weddings/$slug',
   path: '/weddings/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedManageWeddingIdRoute =
+  AuthenticatedManageWeddingIdRouteImport.update({
+    id: '/manage/$weddingId',
+    path: '/manage/$weddingId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
+  '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
+  '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
+  '/_authenticated/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/how-it-works' | '/pricing' | '/weddings/$slug'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/how-it-works' | '/pricing' | '/weddings/$slug'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/auth'
     | '/explore'
     | '/how-it-works'
     | '/pricing'
+    | '/dashboard'
+    | '/contribution/$id'
     | '/weddings/$slug'
+    | '/manage/$weddingId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/auth'
+    | '/explore'
+    | '/how-it-works'
+    | '/pricing'
+    | '/dashboard'
+    | '/contribution/$id'
+    | '/weddings/$slug'
+    | '/manage/$weddingId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/explore'
+    | '/how-it-works'
+    | '/pricing'
+    | '/_authenticated/dashboard'
+    | '/contribution/$id'
+    | '/weddings/$slug'
+    | '/_authenticated/manage/$weddingId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ExploreRoute: typeof ExploreRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PricingRoute: typeof PricingRoute
+  ContributionIdRoute: typeof ContributionIdRoute
   WeddingsSlugRoute: typeof WeddingsSlugRoute
 }
 
@@ -92,6 +161,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -115,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/contribution/$id': {
+      id: '/contribution/$id'
+      path: '/contribution/$id'
+      fullPath: '/contribution/$id'
+      preLoaderRoute: typeof ContributionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/weddings/$slug': {
       id: '/weddings/$slug'
       path: '/weddings/$slug'
@@ -122,14 +219,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WeddingsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/manage/$weddingId': {
+      id: '/_authenticated/manage/$weddingId'
+      path: '/manage/$weddingId'
+      fullPath: '/manage/$weddingId'
+      preLoaderRoute: typeof AuthenticatedManageWeddingIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedManageWeddingIdRoute: typeof AuthenticatedManageWeddingIdRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedManageWeddingIdRoute: AuthenticatedManageWeddingIdRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   ExploreRoute: ExploreRoute,
   HowItWorksRoute: HowItWorksRoute,
   PricingRoute: PricingRoute,
+  ContributionIdRoute: ContributionIdRoute,
   WeddingsSlugRoute: WeddingsSlugRoute,
 }
 export const routeTree = rootRouteImport

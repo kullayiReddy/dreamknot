@@ -14,13 +14,164 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contributions: {
+        Row: {
+          amount: number
+          created_at: string
+          guest_email: string
+          guest_name: string
+          id: string
+          item_id: string
+          message: string
+          paid_at: string | null
+          provider_order_id: string | null
+          provider_payment_id: string | null
+          status: string
+          wedding_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          guest_email?: string
+          guest_name: string
+          id?: string
+          item_id: string
+          message?: string
+          paid_at?: string | null
+          provider_order_id?: string | null
+          provider_payment_id?: string | null
+          status?: string
+          wedding_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          guest_email?: string
+          guest_name?: string
+          id?: string
+          item_id?: string
+          message?: string
+          paid_at?: string | null
+          provider_order_id?: string | null
+          provider_payment_id?: string | null
+          status?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contributions_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contributions_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      items: {
+        Row: {
+          category: string
+          contributors: number
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          kind: string
+          raised: number
+          target: number
+          title: string
+          wedding_id: string
+        }
+        Insert: {
+          category?: string
+          contributors?: number
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          kind?: string
+          raised?: number
+          target: number
+          title: string
+          wedding_id: string
+        }
+        Update: {
+          category?: string
+          contributors?: number
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          kind?: string
+          raised?: number
+          target?: number
+          title?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "items_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      weddings: {
+        Row: {
+          cover_url: string
+          created_at: string
+          id: string
+          names: string
+          owner_id: string
+          place: string
+          published: boolean
+          slug: string
+          story: string
+          wedding_date: string
+        }
+        Insert: {
+          cover_url?: string
+          created_at?: string
+          id?: string
+          names: string
+          owner_id?: string
+          place?: string
+          published?: boolean
+          slug: string
+          story?: string
+          wedding_date?: string
+        }
+        Update: {
+          cover_url?: string
+          created_at?: string
+          id?: string
+          names?: string
+          owner_id?: string
+          place?: string
+          published?: boolean
+          slug?: string
+          story?: string
+          wedding_date?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      mark_contribution_paid: {
+        Args: { _order_id: string; _payment_id: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
