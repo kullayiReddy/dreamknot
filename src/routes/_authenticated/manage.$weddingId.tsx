@@ -172,13 +172,18 @@ function Manage() {
         <span className="font-medium text-foreground">Private by default.</span> Edit details, stories, dreams, and gifts here without changing what guests see. Save your draft, then choose “Publish changes” when you are ready.
       </div>
 
+      <nav aria-label="Couple admin sections" className="flex flex-wrap gap-2">
+        <Button asChild variant="outline" size="sm"><a href="#page-editor">Page editor</a></Button>
+        <Button asChild variant="outline" size="sm"><a href="#payment-admin">Payments & refunds</a></Button>
+      </nav>
+
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Net received" value={formatINR(received)} />
         <Stat label="Confirmed payments" value={String(confirmed.length)} />
         <Stat label="Live items" value={String(items.length)} />
       </div>
 
-      <div className="space-y-4 rounded-2xl bg-card p-6 shadow-soft">
+      <div id="page-editor" className="scroll-mt-24 space-y-4 rounded-2xl bg-card p-6 shadow-soft">
         <div><p className="eyebrow">Private draft</p><h2 className="mt-1 text-3xl">Page details & story</h2></div>
         <div className="space-y-2"><Label htmlFor="couple-names">Couple names</Label><Input id="couple-names" value={draft.details.names} onChange={(event) => updateDetails({ names: event.target.value })} /></div>
         <div className="grid gap-3 sm:grid-cols-2">

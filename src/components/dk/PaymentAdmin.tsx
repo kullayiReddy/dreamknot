@@ -97,7 +97,7 @@ export function PaymentAdmin({ contributions, refunds, onChanged }: Props) {
   }
 
   return (
-    <div className="rounded-2xl bg-card p-6 shadow-soft">
+    <div id="payment-admin" className="scroll-mt-24 rounded-2xl bg-card p-6 shadow-soft">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="eyebrow">Payment admin</p>
