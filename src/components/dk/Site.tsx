@@ -58,15 +58,33 @@ function AccountButtons() {
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border bg-card">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-5">
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">Tie Dreams. Gift Together.</p>
         </div>
-        <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-          {nav.map((n) => <Link key={n.to} to={n.to} className="hover:text-foreground">{n.label}</Link>)}
+        <div>
+          <p className="eyebrow mb-4">Discover</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            {nav.map((n) => <Link key={n.to} to={n.to} className="hover:text-foreground">{n.label}</Link>)}
+          </div>
         </div>
-        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} DreamKnot</p>
+        <div>
+          <p className="eyebrow mb-4">Company</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <Link to="/about" className="hover:text-foreground">About</Link>
+            <Link to="/contact" className="hover:text-foreground">Contact</Link>
+          </div>
+        </div>
+        <div>
+          <p className="eyebrow mb-4">Legal</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <Link to="/terms" className="hover:text-foreground">Terms</Link>
+            <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link to="/refund-policy" className="hover:text-foreground">Refund Policy</Link>
+          </div>
+        </div>
+        <p className="border-t border-border pt-6 text-sm text-muted-foreground md:col-span-5">© {new Date().getFullYear()} DreamKnot</p>
       </div>
     </footer>
   );
