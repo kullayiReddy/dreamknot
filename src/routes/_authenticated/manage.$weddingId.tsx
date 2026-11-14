@@ -18,6 +18,7 @@ import { publishWeddingDraft } from "@/lib/wedding-admin.functions";
 import { formatINR, pct } from "@/lib/demo";
 
 export const Route = createFileRoute("/_authenticated/manage/$weddingId")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [{ title: "Couple admin — DreamKnot" }, { name: "description", content: "Privately draft and publish your wedding page, review payments, and manage refunds." }, { property: "og:title", content: "Couple admin — DreamKnot" }, { property: "og:description", content: "Privately manage your wedding page and contributions." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { name: "robots", content: "noindex, follow" }] }),
   component: Manage,
 });

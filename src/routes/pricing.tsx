@@ -9,6 +9,7 @@ export const plans = [
 ];
 
 export const Route = createFileRoute("/pricing")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Pricing — DreamKnot" },

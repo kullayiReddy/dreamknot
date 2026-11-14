@@ -10,6 +10,7 @@ export const steps = [
 ];
 
 export const Route = createFileRoute("/how-it-works")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "How DreamKnot Works" },

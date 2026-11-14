@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ContentHero, PolicyPage, PolicySection, contentHead } from "@/components/dk/ContentPage";
 
 export const Route = createFileRoute("/refund-policy")({
+  staticData: { sitemap: true },
   head: () => contentHead("Refund Policy", "How DreamKnot handles pending, failed, duplicate, incorrect, and confirmed guest contributions.", "/refund-policy"),
   component: RefundPolicy,
 });

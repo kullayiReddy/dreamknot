@@ -10,6 +10,7 @@ import { steps } from "./how-it-works";
 import { plans } from "./pricing";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "DreamKnot — Wedding Gift Registry & Honeymoon Funds" },

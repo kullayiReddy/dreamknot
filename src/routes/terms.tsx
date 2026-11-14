@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ContentHero, PolicyPage, PolicySection, contentHead } from "@/components/dk/ContentPage";
 
 export const Route = createFileRoute("/terms")({
+  staticData: { sitemap: true },
   head: () => contentHead("Terms and Conditions", "The terms for couples and guests using DreamKnot wedding pages and contributions.", "/terms"),
   component: Terms,
 });

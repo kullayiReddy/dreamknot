@@ -10,6 +10,7 @@ const values = [
 ];
 
 export const Route = createFileRoute("/about")({
+  staticData: { sitemap: true },
   head: () => contentHead("About", "Why DreamKnot helps wedding guests fund meaningful experiences and shared gifts.", "/about"),
   component: About,
 });

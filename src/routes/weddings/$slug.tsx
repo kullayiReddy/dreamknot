@@ -13,6 +13,7 @@ import { createContributionOrder, verifyContribution } from "@/lib/payments.func
 type PageData = { demo: boolean; names: string; date: string; place: string; story: string; image: string; dreams: Dream[]; gifts: Gift[] };
 
 export const Route = createFileRoute("/weddings/$slug")({
+  staticData: { sitemap: true },
   loader: async ({ params }): Promise<PageData> => {
     if (params.slug === demoCouple.slug) return { demo: true, names: demoCouple.names, date: demoCouple.date, place: demoCouple.place, story: demoCouple.story, image: demoCouple.image, dreams: demoDreams, gifts: demoGifts };
     const res = await getPublicWedding({ data: { slug: params.slug } });
