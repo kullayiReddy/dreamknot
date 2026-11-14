@@ -26,6 +26,9 @@ export type Database = {
           paid_at: string | null
           provider_order_id: string | null
           provider_payment_id: string | null
+          review_note: string
+          reviewed_at: string | null
+          reviewed_by: string | null
           status: string
           wedding_id: string
         }
@@ -40,6 +43,9 @@ export type Database = {
           paid_at?: string | null
           provider_order_id?: string | null
           provider_payment_id?: string | null
+          review_note?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string
           wedding_id: string
         }
@@ -54,6 +60,9 @@ export type Database = {
           paid_at?: string | null
           provider_order_id?: string | null
           provider_payment_id?: string | null
+          review_note?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string
           wedding_id?: string
         }
@@ -76,6 +85,7 @@ export type Database = {
       }
       items: {
         Row: {
+          archived: boolean
           category: string
           contributors: number
           created_at: string
@@ -89,6 +99,7 @@ export type Database = {
           wedding_id: string
         }
         Insert: {
+          archived?: boolean
           category?: string
           contributors?: number
           created_at?: string
@@ -102,6 +113,7 @@ export type Database = {
           wedding_id: string
         }
         Update: {
+          archived?: boolean
           category?: string
           contributors?: number
           created_at?: string
@@ -119,6 +131,89 @@ export type Database = {
             foreignKeyName: "items_wedding_id_fkey"
             columns: ["wedding_id"]
             isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      refunds: {
+        Row: {
+          amount: number
+          applied_amount: number
+          completed_at: string | null
+          contribution_id: string
+          created_at: string
+          id: string
+          provider_refund_id: string | null
+          reason: string
+          requested_by: string
+          status: string
+          wedding_id: string
+        }
+        Insert: {
+          amount: number
+          applied_amount?: number
+          completed_at?: string | null
+          contribution_id: string
+          created_at?: string
+          id?: string
+          provider_refund_id?: string | null
+          reason: string
+          requested_by: string
+          status?: string
+          wedding_id: string
+        }
+        Update: {
+          amount?: number
+          applied_amount?: number
+          completed_at?: string | null
+          contribution_id?: string
+          created_at?: string
+          id?: string
+          provider_refund_id?: string | null
+          reason?: string
+          requested_by?: string
+          status?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "refunds_contribution_id_fkey"
+            columns: ["contribution_id"]
+            isOneToOne: false
+            referencedRelation: "contributions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "refunds_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wedding_drafts: {
+        Row: {
+          payload: Json
+          updated_at: string
+          wedding_id: string
+        }
+        Insert: {
+          payload: Json
+          updated_at?: string
+          wedding_id: string
+        }
+        Update: {
+          payload?: Json
+          updated_at?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wedding_drafts_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: true
             referencedRelation: "weddings"
             referencedColumns: ["id"]
           },
@@ -168,9 +263,39 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      approve_contribution: {
+        Args: {
+          _contribution_id: string
+          _note: string
+          _payment_id: string
+          _reviewer_id: string
+        }
+        Returns: string
+      }
+      begin_refund: {
+        Args: {
+          _amount: number
+          _contribution_id: string
+          _reason: string
+          _requested_by: string
+        }
+        Returns: string
+      }
+      finish_refund: {
+        Args: {
+          _provider_refund_id: string
+          _refund_id: string
+          _status: string
+        }
+        Returns: string
+      }
       mark_contribution_paid: {
         Args: { _order_id: string; _payment_id: string }
         Returns: string
+      }
+      publish_wedding_draft: {
+        Args: { _wedding_id: string }
+        Returns: undefined
       }
     }
     Enums: {
