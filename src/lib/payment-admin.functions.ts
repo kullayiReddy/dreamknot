@@ -15,7 +15,11 @@ type ProviderRefund = { id: string; amount: number; status: string; notes?: Reco
 
 export const approvePendingPayment = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => paymentReviewSchema.parse(input))
+  .inputValidator((input: unknown) => {
+    const parsed = paymentReviewSchema.safeParse(input);
+    if (!parsed.success) throw new Error(parsed.error.issues[0]?.message ?? "Check the payment review details.");
+    return parsed.data;
+  })
   .handler(async ({ data, context }) => {
     const { data: contribution } = await context.supabase.from("contributions")
       .select("id, amount, status, provider_order_id, weddings!inner(owner_id)")
@@ -45,7 +49,11 @@ export const approvePendingPayment = createServerFn({ method: "POST" })
 
 export const refundContribution = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => refundRequestSchema.parse(input))
+  .inputValidator((input: unknown) => {
+    const parsed = refundRequestSchema.safeParse(input);
+    if (!parsed.success) throw new Error(parsed.error.issues[0]?.message ?? "Check the refund details.");
+    return parsed.data;
+  })
   .handler(async ({ data, context }) => {
     const { data: contribution } = await context.supabase.from("contributions")
       .select("id, status, provider_payment_id, weddings!inner(owner_id)")
