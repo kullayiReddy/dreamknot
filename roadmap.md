@@ -1,3 +1,8 @@
+# Couple profiles
+- [ ] Add owner-editable real name, location, and social links.
+- [ ] Publish a couple profile page linked from the wedding page.
+- [ ] Verify editing, public visibility, and mobile layout.
+
 # Search visibility and real-account verification
 - [x] Add specific public-page metadata and wedding canonicals; exclude private screens from search.
 - [x] Install and verify a public-wedding sitemap using the assigned public URL.
