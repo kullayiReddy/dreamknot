@@ -23,6 +23,6 @@ export const getPublicWedding = createServerFn({ method: "GET" })
     const sb = publicClient();
     const { data: w } = await sb.from("weddings").select("id, slug, names, wedding_date, place, story, cover_url").eq("slug", data.slug).eq("published", true).maybeSingle();
     if (!w) return null;
-    const { data: items } = await sb.from("items").select("id, kind, title, category, description, image_url, target, raised, contributors").eq("wedding_id", w.id).order("created_at");
+    const { data: items } = await sb.from("items").select("id, kind, title, category, description, image_url, target, raised, contributors").eq("wedding_id", w.id).eq("archived", false).order("created_at");
     return { wedding: w, items: items ?? [] };
   });

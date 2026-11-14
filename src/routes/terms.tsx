@@ -19,7 +19,7 @@ function Terms() {
         </PolicySection>
         <PolicySection title="3. Wedding pages and content">
           <p>Couples are responsible for their names, story, images, gift descriptions, and other content. Content must be lawful, must not infringe another person’s rights, and must not be deceptive, hateful, sexually exploitative, or used for fraud. Optional AI writing tools produce drafts only; couples must review a draft before choosing to use it.</p>
-          <p>You retain ownership of your content. You give DreamKnot permission to host, process, and display it as needed to operate and share your wedding page. An unpublished page is not available through its public wedding address.</p>
+          <p>You retain ownership of your content. You give DreamKnot permission to host, process, and display it as needed to operate and share your wedding page. Management-screen edits are saved as private drafts and change the public page only when you choose to publish them. An unpublished page is not available through its public wedding address.</p>
         </PolicySection>
         <PolicySection title="4. Guest contributions">
           <p>A guest chooses the couple, dream or gift, and amount before opening Razorpay’s secure checkout. Payment credentials are handled by Razorpay and its supported payment methods. A contribution is complete only when its status is “Payment confirmed” or “Confirmed”; a pending or failed entry is not a completed gift.</p>

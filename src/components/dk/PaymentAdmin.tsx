@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -102,7 +103,7 @@ export function PaymentAdmin({ contributions, refunds, onChanged }: Props) {
           <p className="eyebrow">Payment admin</p>
           <h2 className="mt-1 text-3xl">Contributions & refunds</h2>
         </div>
-        <Button asChild variant="link" className="px-0"><a href="/refund-policy" target="_blank" rel="noreferrer">Refund policy</a></Button>
+        <Button asChild variant="link" className="px-0"><Link to="/refund-policy" target="_blank" rel="noreferrer">Refund policy</Link></Button>
       </div>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Approve a pending contribution only after Razorpay verifies that its payment was captured. Approved refunds are reviewed by you, recorded with a reason, and returned to the guest’s original payment method.</p>
       {contributions.length === 0 ? <p className="mt-5 text-muted-foreground">No contributions yet.</p> : (
