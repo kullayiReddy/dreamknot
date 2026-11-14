@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { useSession } from "@/hooks/useSession";
+import { supabase } from "@/integrations/supabase/client";
 
 export function Logo() {
   return (
@@ -30,11 +32,26 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Button asChild size="sm" className="rounded-full px-5">
-          <Link to="/weddings/$slug" params={{ slug: "aarav-and-meera" }}>See a sample page</Link>
-        </Button>
+        <AccountButtons />
       </div>
     </header>
+  );
+}
+
+function AccountButtons() {
+  const { session, ready } = useSession();
+  if (!ready) return <div className="w-32" />;
+  if (!session) return (
+    <div className="flex items-center gap-3">
+      <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground">Sign in</Link>
+      <Button asChild size="sm" className="rounded-full px-5"><Link to="/auth">Create your page</Link></Button>
+    </div>
+  );
+  return (
+    <div className="flex items-center gap-3">
+      <button onClick={async () => { await supabase.auth.signOut(); window.location.replace("/"); }} className="text-sm text-muted-foreground hover:text-foreground">Sign out</button>
+      <Button asChild size="sm" className="rounded-full px-5"><Link to="/dashboard">Dashboard</Link></Button>
+    </div>
   );
 }
 
