@@ -1,3 +1,7 @@
+# Payment payout review
+- [ ] Trace how guest payments reach the couple and identify missing payout setup or dashboard information.
+- [ ] Check the complete payment status flow upfront and report anything not verified with a real transaction.
+
 # Couple profiles
 - [ ] Add owner-editable real name, location, and social links.
 - [ ] Publish a couple profile page linked from the wedding page.
