@@ -16,6 +16,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Couples create a wedding page; guests contribute to honeymoons, homes and collaborative gifts." },
       { property: "og:title", content: "DreamKnot — Make Their Dreams the Greatest Gift" },
       { property: "og:description", content: "Wedding gifting for dream experiences and collaborative gifts." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -32,9 +34,9 @@ function Home() {
   return (
     <>
       <section className="relative isolate min-h-[88vh] overflow-hidden">
-        <img src={hero} alt="Couple on a lakeside terrace at golden hour" width={1600} height={1008} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <img src={hero} alt="Couple on a lakeside terrace at golden hour" width={1600} height={1008} className="hero-arrival absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-foreground/75 via-foreground/35 to-transparent" />
-        <div className="mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-6 text-background">
+        <div className="hero-copy mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-6 py-14 text-background">
           <p className="eyebrow fade-up">Tie Dreams. Gift Together.</p>
           <h1 className="fade-up mt-4 max-w-2xl text-5xl leading-[1.05] md:text-7xl">Make Their Dreams the Greatest Gift.</h1>
           <p className="fade-up mt-6 max-w-lg text-lg text-background/85">A beautiful way to celebrate love. Help couples experience more, dream bigger and receive gifts they truly want.</p>

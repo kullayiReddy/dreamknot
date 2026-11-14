@@ -1,11 +1,12 @@
 import { Gift as GiftIcon, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { ProgressBar } from "./Site";
 import { formatINR, pct, type Dream, type Gift } from "@/lib/demo";
 
 export function DreamCard({ d, onContribute }: { d: Dream; onContribute?: () => void }) {
   const p = pct(d.raised, d.target);
   return (
-    <article className="group overflow-hidden rounded-2xl bg-card shadow-soft">
+    <article className="motion-card group overflow-hidden rounded-2xl bg-card shadow-soft">
       <div className="aspect-[4/5] overflow-hidden">
         <img src={d.image} alt={d.title} loading="lazy" width={800} height={1008} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
       </div>
@@ -17,9 +18,9 @@ export function DreamCard({ d, onContribute }: { d: Dream; onContribute?: () => 
           <span>{formatINR(d.raised)} of {formatINR(d.target)}</span><span>{p}%</span>
         </div>
         {onContribute && (
-          <button onClick={onContribute} className="w-full rounded-full border border-foreground py-2.5 text-sm font-medium transition-colors hover:bg-foreground hover:text-background">
+          <Button variant="outline" onClick={onContribute} className="h-auto w-full rounded-full border-foreground py-2.5 hover:bg-foreground hover:text-background">
             Contribute
-          </button>
+          </Button>
         )}
       </div>
     </article>
@@ -30,7 +31,7 @@ export function GiftCard({ g, onContribute }: { g: Gift; onContribute?: () => vo
   const p = pct(g.raised, g.target);
   const done = p >= 100;
   return (
-    <article className="rounded-2xl bg-card p-6 shadow-soft">
+    <article className="motion-card rounded-2xl bg-card p-6 shadow-soft">
       <div className="flex items-start justify-between">
         <div className="grid h-12 w-12 place-items-center rounded-full bg-muted text-gold"><GiftIcon className="h-5 w-5" /></div>
         <span className={`rounded-full px-3 py-1 text-xs ${done ? "bg-gold text-foreground" : "bg-muted text-muted-foreground"}`}>{done ? "Fully funded" : g.category}</span>
@@ -43,9 +44,9 @@ export function GiftCard({ g, onContribute }: { g: Gift; onContribute?: () => vo
         <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" />{g.contributors}</span>
       </div>
       {onContribute && !done && (
-        <button onClick={onContribute} className="mt-5 w-full rounded-full border border-foreground py-2.5 text-sm font-medium transition-colors hover:bg-foreground hover:text-background">
+        <Button variant="outline" onClick={onContribute} className="mt-5 h-auto w-full rounded-full border-foreground py-2.5 hover:bg-foreground hover:text-background">
           Chip in
-        </button>
+        </Button>
       )}
     </article>
   );

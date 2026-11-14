@@ -16,6 +16,8 @@ export const Route = createFileRoute("/how-it-works")({
       { name: "description", content: "Create a wedding page, add dreams and gifts, share the link, and let guests contribute." },
       { property: "og:title", content: "How DreamKnot Works" },
       { property: "og:description", content: "Five simple steps from wedding page to shared dreams." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

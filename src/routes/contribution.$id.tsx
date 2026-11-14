@@ -6,7 +6,7 @@ import { getContributionStatus } from "@/lib/payments.functions";
 import { formatINR } from "@/lib/demo";
 
 export const Route = createFileRoute("/contribution/$id")({
-  head: () => ({ meta: [{ title: "Contribution status — DreamKnot" }, { name: "description", content: "Your DreamKnot contribution status." }, { property: "og:title", content: "Contribution status — DreamKnot" }, { property: "og:description", content: "Your contribution status." }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Contribution status — DreamKnot" }, { name: "description", content: "Your DreamKnot contribution status." }, { property: "og:title", content: "Contribution status — DreamKnot" }, { property: "og:description", content: "Your contribution status." }, { name: "robots", content: "noindex" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: StatusPage,
 });
 

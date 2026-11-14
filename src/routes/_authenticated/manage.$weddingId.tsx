@@ -11,7 +11,7 @@ import { ProgressBar } from "@/components/dk/Site";
 import { formatINR, pct } from "@/lib/demo";
 
 export const Route = createFileRoute("/_authenticated/manage/$weddingId")({
-  head: () => ({ meta: [{ title: "Manage wedding — DreamKnot" }, { name: "description", content: "Edit your wedding page, dreams and gifts." }, { property: "og:title", content: "Manage wedding — DreamKnot" }, { property: "og:description", content: "Edit your wedding page." }] }),
+  head: () => ({ meta: [{ title: "Manage wedding — DreamKnot" }, { name: "description", content: "Edit your wedding page, dreams and gifts." }, { property: "og:title", content: "Manage wedding — DreamKnot" }, { property: "og:description", content: "Edit your wedding page." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Manage,
 });
 
