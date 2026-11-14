@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { ProgressBar } from "@/components/dk/Site";
 import { PaymentAdmin, type AdminContribution, type AdminRefund } from "@/components/dk/PaymentAdmin";
 import { WritingAssistant } from "@/components/dk/WritingAssistant";
+import { CoupleProfileEditor } from "@/components/dk/CoupleProfileEditor";
 import { draftFromLive, weddingDraftSchema, type DraftItem, type WeddingDraft } from "@/lib/wedding-admin";
 import { publishWeddingDraft } from "@/lib/wedding-admin.functions";
 import { formatINR, pct } from "@/lib/demo";
@@ -174,6 +175,7 @@ function Manage() {
       </div>
 
       <nav aria-label="Couple admin sections" className="flex flex-wrap gap-2">
+        <Button asChild variant="outline" size="sm"><a href="#couple-profile">Couple profile</a></Button>
         <Button asChild variant="outline" size="sm"><a href="#page-editor">Page editor</a></Button>
         <Button asChild variant="outline" size="sm"><a href="#payment-admin">Payments & refunds</a></Button>
       </nav>
@@ -183,6 +185,8 @@ function Manage() {
         <Stat label="Confirmed payments" value={String(confirmed.length)} />
         <Stat label="Live items" value={String(items.length)} />
       </div>
+
+      <CoupleProfileEditor weddingId={weddingId} slug={wedding.slug} fallbackName={wedding.names} published={wedding.published} />
 
       <div id="page-editor" className="scroll-mt-24 space-y-4 rounded-2xl bg-card p-6 shadow-soft">
         <div><p className="eyebrow">Private draft</p><h2 className="mt-1 text-3xl">Page details & story</h2></div>

@@ -25,6 +25,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as ContributionIdRouteImport } from './routes/contribution.$id'
 import { Route as WeddingsSlugRouteImport } from './routes/weddings/$slug'
 import { Route as AuthenticatedManageWeddingIdRouteImport } from './routes/_authenticated/manage.$weddingId'
+import { Route as WeddingsSlugProfileRouteImport } from './routes/weddings/$slug_.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +107,11 @@ const AuthenticatedManageWeddingIdRoute =
     path: '/manage/$weddingId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const WeddingsSlugProfileRoute = WeddingsSlugProfileRouteImport.update({
+  id: '/weddings/$slug_/profile',
+  path: '/weddings/$slug/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/weddings/$slug/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/weddings/$slug/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/_authenticated/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/weddings/$slug_/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/manage/$weddingId'
+    | '/weddings/$slug/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/manage/$weddingId'
+    | '/weddings/$slug/profile'
   id:
     | '__root__'
     | '/'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/_authenticated/manage/$weddingId'
+    | '/weddings/$slug_/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   ContributionIdRoute: typeof ContributionIdRoute
   WeddingsSlugRoute: typeof WeddingsSlugRoute
+  WeddingsSlugProfileRoute: typeof WeddingsSlugProfileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -346,6 +359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedManageWeddingIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/weddings/$slug_/profile': {
+      id: '/weddings/$slug_/profile'
+      path: '/weddings/$slug/profile'
+      fullPath: '/weddings/$slug/profile'
+      preLoaderRoute: typeof WeddingsSlugProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -377,6 +397,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   ContributionIdRoute: ContributionIdRoute,
   WeddingsSlugRoute: WeddingsSlugRoute,
+  WeddingsSlugProfileRoute: WeddingsSlugProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
