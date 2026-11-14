@@ -13,6 +13,8 @@ export const Route = createFileRoute("/auth")({
       { name: "description", content: "Sign in or create your DreamKnot couple account." },
       { property: "og:title", content: "Sign in — DreamKnot" },
       { property: "og:description", content: "Create and manage your wedding gifting page." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,

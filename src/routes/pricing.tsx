@@ -15,6 +15,8 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Free, Plus ₹999 and Signature ₹2,499 per wedding." },
       { property: "og:title", content: "Pricing — DreamKnot" },
       { property: "og:description", content: "Simple per-wedding pricing for couples." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

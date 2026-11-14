@@ -27,7 +27,7 @@ export const Route = createFileRoute("/weddings/$slug")({
   head: ({ loaderData }) => {
     const t = loaderData ? `${loaderData.names} — DreamKnot` : "Wedding — DreamKnot";
     const d = loaderData ? `Celebrate ${loaderData.names} by contributing to their dreams and gifts.` : "A DreamKnot wedding page.";
-    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }] };
+    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, ...(loaderData?.image.startsWith("https://") ? [{ property: "og:image", content: loaderData.image }, { name: "twitter:image", content: loaderData.image }] : [])] };
   },
   component: WeddingPage,
 });
@@ -87,7 +87,7 @@ function WeddingPage() {
   return (
     <>
       <section className="relative isolate h-[70vh] overflow-hidden">
-        <img src={p.image} alt={p.names} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <img src={p.image} alt={p.names} className="hero-arrival absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-foreground/80 to-transparent" />
         <div className="flex h-full flex-col items-center justify-end pb-16 text-center text-background">
           <p className="eyebrow">{[p.date, p.place].filter(Boolean).join(" · ")}</p>
