@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as WeddingsSlugRouteImport } from './routes/weddings/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeddingsSlugRoute = WeddingsSlugRouteImport.update({
+  id: '/weddings/$slug',
+  path: '/weddings/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
+  '/weddings/$slug': typeof WeddingsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
+  '/weddings/$slug': typeof WeddingsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
+  '/weddings/$slug': typeof WeddingsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/explore' | '/how-it-works' | '/pricing' | '/weddings/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/explore' | '/how-it-works' | '/pricing' | '/weddings/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/explore'
+    | '/how-it-works'
+    | '/pricing'
+    | '/weddings/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExploreRoute: typeof ExploreRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  PricingRoute: typeof PricingRoute
+  WeddingsSlugRoute: typeof WeddingsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weddings/$slug': {
+      id: '/weddings/$slug'
+      path: '/weddings/$slug'
+      fullPath: '/weddings/$slug'
+      preLoaderRoute: typeof WeddingsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExploreRoute: ExploreRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  PricingRoute: PricingRoute,
+  WeddingsSlugRoute: WeddingsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
