@@ -12,6 +12,16 @@ export const refundRequestSchema = z.object({
   reason: z.string().trim().min(5, "Explain why this refund is approved").max(500),
 });
 
+export function assertCapturedPayment(
+  payment: { id: string; order_id: string; amount: number; currency: string; status: string },
+  expected: { paymentId?: string; orderId: string; amount: number },
+) {
+  if (expected.paymentId && payment.id !== expected.paymentId) throw new Error("The payment reference does not match.");
+  if (payment.status !== "captured") throw new Error("This payment has not been captured by Razorpay.");
+  if (payment.order_id !== expected.orderId) throw new Error("This payment belongs to a different order.");
+  if (payment.amount !== expected.amount * 100 || payment.currency !== "INR") throw new Error("The payment amount or currency does not match this contribution.");
+}
+
 export function assertApprovableStatus(status: string) {
   if (status !== "pending") throw new Error("Only a pending contribution can be approved.");
 }

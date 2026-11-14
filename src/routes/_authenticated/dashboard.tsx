@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PaymentPayoutInfo } from "@/components/dk/PaymentPayoutInfo";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   staticData: { sitemap: false },
@@ -46,6 +47,7 @@ function Dashboard() {
         <Input required placeholder="Couple names, e.g. Aarav & Meera" value={names} onChange={(e) => setNames(e.target.value)} />
         <Button type="submit" className="rounded-full">Create page</Button>
       </form>
+      <div className="mt-8"><PaymentPayoutInfo /></div>
       <div className="mt-8 space-y-3">
         {weddings.length === 0 && <p className="text-muted-foreground">No pages yet — create your first above.</p>}
         {weddings.map((w) => (

@@ -15,6 +15,13 @@
       "when": 1794631591084,
       "tag": "0001_private_wedding_drafts_and_payment_admin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794662081833,
+      "tag": "0002_create_couple_profiles",
+      "breakpoints": true
     }
   ]
 }

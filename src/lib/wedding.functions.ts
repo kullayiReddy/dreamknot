@@ -26,3 +26,15 @@ export const getPublicWedding = createServerFn({ method: "GET" })
     const { data: items } = await sb.from("items").select("id, kind, title, category, description, image_url, target, raised, contributors").eq("wedding_id", w.id).eq("archived", false).order("created_at");
     return { wedding: w, items: items ?? [] };
   });
+
+export const getPublicCoupleProfile = createServerFn({ method: "GET" })
+  .inputValidator((input: { slug: string }) => ({ slug: String(input.slug).slice(0, 80) }))
+  .handler(async ({ data }) => {
+    const sb = publicClient();
+    const { data: wedding, error: weddingError } = await sb.from("weddings").select("id, slug, names, wedding_date, place, story, cover_url").eq("slug", data.slug).eq("published", true).maybeSingle();
+    if (weddingError) throw new Error("Could not load this wedding.");
+    if (!wedding) return null;
+    const { data: profile, error: profileError } = await sb.from("couple_profiles").select("display_name, location, instagram_url, facebook_url, website_url").eq("wedding_id", wedding.id).maybeSingle();
+    if (profileError) throw new Error("Could not load this couple profile.");
+    return { wedding, profile };
+  });

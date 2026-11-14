@@ -83,6 +83,44 @@ export type Database = {
           },
         ]
       }
+      couple_profiles: {
+        Row: {
+          display_name: string
+          facebook_url: string
+          instagram_url: string
+          location: string
+          updated_at: string
+          website_url: string
+          wedding_id: string
+        }
+        Insert: {
+          display_name?: string
+          facebook_url?: string
+          instagram_url?: string
+          location?: string
+          updated_at?: string
+          website_url?: string
+          wedding_id: string
+        }
+        Update: {
+          display_name?: string
+          facebook_url?: string
+          instagram_url?: string
+          location?: string
+          updated_at?: string
+          website_url?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "couple_profiles_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: true
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       items: {
         Row: {
           archived: boolean

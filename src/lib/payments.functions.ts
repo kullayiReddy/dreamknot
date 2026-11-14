@@ -1,4 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { assertCapturedPayment } from "@/lib/payment-admin";
 
 function keys() {
   const id = process.env["RAZORPAY_KEY_ID"];
@@ -14,6 +16,14 @@ async function hmacHex(secret: string, msg: string) {
 }
 
 type OrderInput = { itemId: string; amount: number; guestName: string; guestEmail: string; message: string };
+
+export const getPaymentSetup = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async () => {
+    const id = process.env["RAZORPAY_KEY_ID"];
+    const secret = process.env["RAZORPAY_KEY_SECRET"];
+    return { configured: Boolean(id && secret), live: Boolean(id?.startsWith("rzp_live_")) };
+  });
 
 export const createContributionOrder = createServerFn({ method: "POST" })
   .inputValidator((i: OrderInput) => {
@@ -51,10 +61,18 @@ export const createContributionOrder = createServerFn({ method: "POST" })
 export const verifyContribution = createServerFn({ method: "POST" })
   .inputValidator((i: { orderId: string; paymentId: string; signature: string }) => ({ orderId: String(i.orderId), paymentId: String(i.paymentId), signature: String(i.signature) }))
   .handler(async ({ data }) => {
-    const { secret } = keys();
+    const { id, secret } = keys();
     const expected = await hmacHex(secret, `${data.orderId}|${data.paymentId}`);
     if (expected !== data.signature) throw new Error("Payment could not be verified.");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: contribution } = await supabaseAdmin.from("contributions").select("amount").eq("provider_order_id", data.orderId).maybeSingle();
+    if (!contribution) throw new Error("Payment could not be matched to a contribution.");
+    const response = await fetch(`https://api.razorpay.com/v1/payments/${encodeURIComponent(data.paymentId)}`, {
+      headers: { authorization: "Basic " + btoa(`${id}:${secret}`) },
+    });
+    if (!response.ok) throw new Error("Razorpay could not confirm this payment yet.");
+    const payment = await response.json() as { id: string; order_id: string; amount: number; currency: string; status: string };
+    assertCapturedPayment(payment, { paymentId: data.paymentId, orderId: data.orderId, amount: contribution.amount });
     const { data: cid, error } = await supabaseAdmin.rpc("mark_contribution_paid", { _order_id: data.orderId, _payment_id: data.paymentId });
     if (error) throw new Error("Payment could not be recorded.");
     return { contributionId: cid as string };
