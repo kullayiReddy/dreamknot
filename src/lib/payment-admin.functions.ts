@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { assertApprovableStatus, assertRefundable, paymentReviewSchema, refundRequestSchema } from "@/lib/payment-admin";
+import { assertApprovableStatus, assertCapturedPayment, assertRefundable, paymentReviewSchema, refundRequestSchema } from "@/lib/payment-admin";
 
 function razorpayKeys() {
   const id = process.env["RAZORPAY_KEY_ID"];
@@ -32,9 +32,7 @@ export const approvePendingPayment = createServerFn({ method: "POST" })
     });
     if (!response.ok) throw new Error("Razorpay could not find or verify this payment reference.");
     const payment = await response.json() as ProviderPayment;
-    if (payment.status !== "captured") throw new Error("This payment has not been captured by Razorpay.");
-    if (payment.order_id !== contribution.provider_order_id) throw new Error("This payment belongs to a different order.");
-    if (payment.amount !== contribution.amount * 100 || payment.currency !== "INR") throw new Error("The payment amount or currency does not match this contribution.");
+    assertCapturedPayment(payment, { paymentId: data.paymentId, orderId: contribution.provider_order_id!, amount: contribution.amount });
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.rpc("approve_contribution", {
