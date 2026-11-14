@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PaymentPayoutInfo } from "@/components/dk/PaymentPayoutInfo";
+import { PayoutHistory } from "@/components/dk/PayoutHistory";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   staticData: { sitemap: false },
@@ -23,7 +24,8 @@ function Dashboard() {
     queryKey: ["my-weddings"],
     queryFn: async () => {
       const { data: u } = await supabase.auth.getUser();
-      const { data, error } = await supabase.from("weddings").select("id, slug, names, wedding_date, published").eq("owner_id", u.user!.id).order("created_at", { ascending: false });
+      if (!u.user) throw new Error("Please sign in");
+      const { data, error } = await supabase.from("weddings").select("id, slug, names, wedding_date, published").eq("owner_id", u.user.id).order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
@@ -60,6 +62,7 @@ function Dashboard() {
           </Link>
         ))}
       </div>
+      <PayoutHistory />
     </section>
   );
 }

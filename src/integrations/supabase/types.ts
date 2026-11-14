@@ -174,6 +174,72 @@ export type Database = {
           },
         ]
       }
+      payout_requests: {
+        Row: {
+          amount: number
+          bank_ciphertext: string
+          bank_last4: string
+          bank_name: string
+          contribution_id: string
+          created_at: string
+          id: string
+          owner_id: string
+          payment_mode: string
+          review_note: string | null
+          settled_at: string | null
+          status: string
+          transfer_reference: string | null
+          wedding_id: string
+        }
+        Insert: {
+          amount: number
+          bank_ciphertext: string
+          bank_last4: string
+          bank_name: string
+          contribution_id: string
+          created_at?: string
+          id?: string
+          owner_id: string
+          payment_mode: string
+          review_note?: string | null
+          settled_at?: string | null
+          status?: string
+          transfer_reference?: string | null
+          wedding_id: string
+        }
+        Update: {
+          amount?: number
+          bank_ciphertext?: string
+          bank_last4?: string
+          bank_name?: string
+          contribution_id?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          payment_mode?: string
+          review_note?: string | null
+          settled_at?: string | null
+          status?: string
+          transfer_reference?: string | null
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payout_requests_contribution_id_fkey"
+            columns: ["contribution_id"]
+            isOneToOne: false
+            referencedRelation: "contributions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payout_requests_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       refunds: {
         Row: {
           amount: number
@@ -334,6 +400,17 @@ export type Database = {
       publish_wedding_draft: {
         Args: { _wedding_id: string }
         Returns: undefined
+      }
+      submit_couple_payout: {
+        Args: {
+          _bank_name: string
+          _ciphertext: string
+          _contribution: string
+          _last4: string
+          _mode: string
+          _owner: string
+        }
+        Returns: string
       }
     }
     Enums: {

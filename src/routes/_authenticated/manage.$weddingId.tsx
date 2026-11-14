@@ -15,6 +15,7 @@ import { PaymentAdmin, type AdminContribution, type AdminRefund } from "@/compon
 import { WritingAssistant } from "@/components/dk/WritingAssistant";
 import { CoupleProfileEditor } from "@/components/dk/CoupleProfileEditor";
 import { PaymentPayoutInfo } from "@/components/dk/PaymentPayoutInfo";
+import { PayoutHistory } from "@/components/dk/PayoutHistory";
 import { draftFromLive, weddingDraftSchema, type DraftItem, type WeddingDraft } from "@/lib/wedding-admin";
 import { publishWeddingDraft } from "@/lib/wedding-admin.functions";
 import { formatINR, pct } from "@/lib/demo";
@@ -179,6 +180,7 @@ function Manage() {
         <Button asChild variant="outline" size="sm"><a href="#couple-profile">Couple profile</a></Button>
         <Button asChild variant="outline" size="sm"><a href="#page-editor">Page editor</a></Button>
         <Button asChild variant="outline" size="sm"><a href="#payment-admin">Payments & refunds</a></Button>
+        <Button asChild variant="outline" size="sm"><Link to="/payouts/$weddingId" params={{ weddingId }}>Bank payout requests</Link></Button>
       </nav>
 
       <div className="grid gap-4 sm:grid-cols-3">
@@ -240,6 +242,7 @@ function Manage() {
       </div>
 
       <PaymentPayoutInfo />
+      <PayoutHistory weddingId={weddingId} />
       {paymentQuery.isLoading ? <p className="text-center text-muted-foreground">Loading payments…</p> : <PaymentAdmin contributions={payments.contributions} refunds={payments.refunds} onChanged={() => qc.invalidateQueries({ queryKey: ["wedding-payments", weddingId] })} />}
     </section>
   );

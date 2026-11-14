@@ -15,7 +15,7 @@ export function PaymentPayoutInfo() {
         <div className="max-w-2xl">
           <div className="flex items-center gap-2"><Landmark className="h-5 w-5 text-gold" /><p className="eyebrow">How you get paid</p></div>
           <h2 id="payout-heading" className="mt-2 text-3xl">Guest payments settle through Razorpay</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Guests pay into the Razorpay account connected to DreamKnot. After Razorpay verifies your account and bank details, it settles captured payments to that linked bank account on its settlement schedule. You do not withdraw money from DreamKnot.</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Guests pay into DreamKnot’s single connected Razorpay account. Razorpay settles eligible live payments to that merchant account’s linked bank—not automatically to each couple. Couple bank payout requests can be saved, but transfers are not connected yet.</p>
         </div>
         <Button asChild variant="outline" className="rounded-full"><a href="https://dashboard.razorpay.com/" target="_blank" rel="noreferrer">Open Razorpay<ExternalLink className="h-4 w-4" /></a></Button>
       </div>

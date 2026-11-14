@@ -25,6 +25,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as ContributionIdRouteImport } from './routes/contribution.$id'
 import { Route as WeddingsSlugRouteImport } from './routes/weddings/$slug'
 import { Route as AuthenticatedManageWeddingIdRouteImport } from './routes/_authenticated/manage.$weddingId'
+import { Route as AuthenticatedPayoutsWeddingIdRouteImport } from './routes/_authenticated/payouts.$weddingId'
 import { Route as WeddingsSlugProfileRouteImport } from './routes/weddings/$slug_.profile'
 
 const IndexRoute = IndexRouteImport.update({
@@ -107,6 +108,12 @@ const AuthenticatedManageWeddingIdRoute =
     path: '/manage/$weddingId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPayoutsWeddingIdRoute =
+  AuthenticatedPayoutsWeddingIdRouteImport.update({
+    id: '/payouts/$weddingId',
+    path: '/payouts/$weddingId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const WeddingsSlugProfileRoute = WeddingsSlugProfileRouteImport.update({
   id: '/weddings/$slug_/profile',
   path: '/weddings/$slug/profile',
@@ -129,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/payouts/$weddingId': typeof AuthenticatedPayoutsWeddingIdRoute
   '/weddings/$slug/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRoutesByTo {
@@ -147,6 +155,7 @@ export interface FileRoutesByTo {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/payouts/$weddingId': typeof AuthenticatedPayoutsWeddingIdRoute
   '/weddings/$slug/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRoutesById {
@@ -167,6 +176,7 @@ export interface FileRoutesById {
   '/contribution/$id': typeof ContributionIdRoute
   '/weddings/$slug': typeof WeddingsSlugRoute
   '/_authenticated/manage/$weddingId': typeof AuthenticatedManageWeddingIdRoute
+  '/_authenticated/payouts/$weddingId': typeof AuthenticatedPayoutsWeddingIdRoute
   '/weddings/$slug_/profile': typeof WeddingsSlugProfileRoute
 }
 export interface FileRouteTypes {
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/manage/$weddingId'
+    | '/payouts/$weddingId'
     | '/weddings/$slug/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/manage/$weddingId'
+    | '/payouts/$weddingId'
     | '/weddings/$slug/profile'
   id:
     | '__root__'
@@ -224,6 +236,7 @@ export interface FileRouteTypes {
     | '/contribution/$id'
     | '/weddings/$slug'
     | '/_authenticated/manage/$weddingId'
+    | '/_authenticated/payouts/$weddingId'
     | '/weddings/$slug_/profile'
   fileRoutesById: FileRoutesById
 }
@@ -359,6 +372,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedManageWeddingIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/payouts/$weddingId': {
+      id: '/_authenticated/payouts/$weddingId'
+      path: '/payouts/$weddingId'
+      fullPath: '/payouts/$weddingId'
+      preLoaderRoute: typeof AuthenticatedPayoutsWeddingIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/weddings/$slug_/profile': {
       id: '/weddings/$slug_/profile'
       path: '/weddings/$slug/profile'
@@ -372,11 +392,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedManageWeddingIdRoute: typeof AuthenticatedManageWeddingIdRoute
+  AuthenticatedPayoutsWeddingIdRoute: typeof AuthenticatedPayoutsWeddingIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedManageWeddingIdRoute: AuthenticatedManageWeddingIdRoute,
+  AuthenticatedPayoutsWeddingIdRoute: AuthenticatedPayoutsWeddingIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
