@@ -26,11 +26,13 @@ function Manage() {
       const [w, items, contribs] = await Promise.all([
         supabase.from("weddings").select("*").eq("id", weddingId).single(),
         supabase.from("items").select("*").eq("wedding_id", weddingId).order("created_at"),
-        supabase.from("contributions").select("id, guest_name, amount, message, status, created_at, items(title)").eq("wedding_id", weddingId).order("created_at", { ascending: false }),
+        supabase.from("contributions").select("id, guest_name, amount, message, status, created_at, paid_at, provider_payment_id, items(title)").eq("wedding_id", weddingId).order("created_at", { ascending: false }),
       ]);
       if (w.error) throw w.error;
       return { wedding: w.data, items: items.data ?? [], contribs: contribs.data ?? [] };
     },
+    refetchInterval: (query) => query.state.data?.contribs.some((c) => c.status === "pending") ? 5000 : false,
+    refetchOnWindowFocus: true,
   });
   const [form, setForm] = useState({ names: "", wedding_date: "", place: "", story: "", cover_url: "", published: false });
   useEffect(() => { if (q.data) { const w = q.data.wedding; setForm({ names: w.names, wedding_date: w.wedding_date, place: w.place, story: w.story, cover_url: w.cover_url, published: w.published }); } }, [q.data]);
@@ -142,7 +144,12 @@ function Manage() {
             {contribs.map((c) => (
               <li key={c.id} className="flex justify-between gap-4 py-3 text-sm">
                 <div><p className="font-medium">{c.guest_name} · {(c as any).items?.title}</p>{c.message && <p className="text-muted-foreground">“{c.message}”</p>}</div>
-                <div className="text-right"><p>{formatINR(c.amount)}</p><p className={`text-xs ${c.status === "paid" ? "text-gold" : "text-muted-foreground"}`}>{c.status}</p></div>
+                <div className="text-right">
+                  <p>{formatINR(c.amount)}</p>
+                  <p className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${c.status === "paid" ? "bg-gold/15 text-foreground" : "bg-muted text-muted-foreground"}`}>{c.status === "paid" ? "Confirmed" : c.status === "failed" ? "Failed" : "Pending"}</p>
+                  {c.provider_payment_id && <p className="mt-1 max-w-44 break-all text-xs text-muted-foreground">Ref. {c.provider_payment_id}</p>}
+                  {c.paid_at && <p className="mt-1 text-xs text-muted-foreground">{new Date(c.paid_at).toLocaleString("en-IN")}</p>}
+                </div>
               </li>
             ))}
           </ul>

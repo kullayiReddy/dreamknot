@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -139,6 +139,7 @@ function WeddingPage() {
                 {busy ? "Opening secure payment…" : `Contribute ${amount ? formatINR(Number(amount)) : ""}`}
               </button>
               <p className="text-center text-xs text-muted-foreground">Secure payment by Razorpay · UPI, cards, netbanking</p>
+              <p className="text-center text-xs text-muted-foreground">By contributing, you agree to the <Link to="/terms" className="underline">Terms</Link> and <Link to="/refund-policy" className="underline">Refund Policy</Link>.</p>
             </>
           )}
         </DialogContent>
