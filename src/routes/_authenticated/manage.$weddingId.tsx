@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { ProgressBar } from "@/components/dk/Site";
 import { formatINR, pct } from "@/lib/demo";
+import { WritingAssistant } from "@/components/dk/WritingAssistant";
 
 export const Route = createFileRoute("/_authenticated/manage/$weddingId")({
   head: () => ({ meta: [{ title: "Manage wedding — DreamKnot" }, { name: "description", content: "Edit your wedding page, dreams and gifts." }, { property: "og:title", content: "Manage wedding — DreamKnot" }, { property: "og:description", content: "Edit your wedding page." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
@@ -92,6 +93,7 @@ function Manage() {
         </div>
         <Input placeholder="Cover photo link (https://…)" value={form.cover_url} onChange={(e) => setForm({ ...form, cover_url: e.target.value })} />
         <Textarea placeholder="Your story" value={form.story} onChange={(e) => setForm({ ...form, story: e.target.value })} />
+        <WritingAssistant weddingId={weddingId} names={form.names} date={form.wedding_date} place={form.place} kind="story" existing={form.story} onApply={(story) => setForm((current) => ({ ...current, story }))} />
         <label className="flex items-center gap-3 text-sm"><Switch checked={form.published} onCheckedChange={(v) => setForm({ ...form, published: v })} /> Published (guests can see it)</label>
         <div className="flex justify-between">
           <Button onClick={save} className="rounded-full">Save</Button>
@@ -106,6 +108,12 @@ function Manage() {
             <div className="flex-1">
               <p className="eyebrow">{i.kind === "dream" ? "Dream" : "Gift"} {i.category && `· ${i.category}`}</p>
               <p className="text-xl">{i.title}</p>
+              {i.description && <p className="mt-1 text-sm text-muted-foreground">{i.description}</p>}
+              <div className="mt-2"><WritingAssistant weddingId={weddingId} names={form.names} date={form.wedding_date} place={form.place} kind="gift" title={i.title} existing={i.description} onApply={async (description) => {
+                const { error } = await supabase.from("items").update({ description }).eq("id", i.id).eq("wedding_id", weddingId);
+                if (error) throw error;
+                toast.success("Description saved"); await refresh();
+              }} /></div>
               <div className="mt-2"><ProgressBar value={pct(i.raised, i.target)} /></div>
               <p className="mt-1 text-xs text-muted-foreground">{formatINR(i.raised)} of {formatINR(i.target)} · {i.contributors} contributors</p>
             </div>
@@ -121,7 +129,8 @@ function Manage() {
           <Input placeholder="Category" value={item.category} onChange={(e) => setItem({ ...item, category: e.target.value })} />
           <Input required type="number" min={1} placeholder="Target (₹)" value={item.target} onChange={(e) => setItem({ ...item, target: e.target.value })} />
           <Input placeholder="Image link (optional)" value={item.image_url} onChange={(e) => setItem({ ...item, image_url: e.target.value })} />
-          <Input placeholder="Short description" value={item.description} onChange={(e) => setItem({ ...item, description: e.target.value })} />
+          <Textarea placeholder="Short description" value={item.description} onChange={(e) => setItem({ ...item, description: e.target.value })} />
+          <div className="sm:col-span-2"><WritingAssistant weddingId={weddingId} names={form.names} date={form.wedding_date} place={form.place} kind="gift" title={item.title} existing={item.description} onApply={(description) => setItem((current) => ({ ...current, description }))} /></div>
           <Button type="submit" variant="outline" className="rounded-full sm:col-span-2">Add item</Button>
         </form>
       </div>

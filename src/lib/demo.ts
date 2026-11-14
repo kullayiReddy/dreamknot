@@ -4,7 +4,7 @@ import maldives from "@/assets/maldives.jpg";
 import hero from "@/assets/hero.jpg";
 
 export type Dream = { id: string; title: string; category: string; image: string; target: number; raised: number; description: string; suggested: number[] };
-export type Gift = { id: string; name: string; category: string; target: number; raised: number; contributors: number; organizer: string };
+export type Gift = { id: string; name: string; category: string; target: number; raised: number; contributors: number; organizer: string; description?: string };
 
 export const formatINR = (n: number) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
 export const pct = (r: number, t: number) => Math.min(100, Math.round((r / t) * 100));
