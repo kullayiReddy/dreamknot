@@ -1,7 +1,9 @@
 # Search visibility and real-account verification
-- [ ] Add specific public-page metadata and wedding canonicals; exclude private screens from search.
-- [ ] Install a public-wedding sitemap once a published public URL exists.
-- [ ] Check the real account dashboard and publish the chosen wedding after receiving its details.
+- [x] Add specific public-page metadata and wedding canonicals; exclude private screens from search.
+- [x] Install and verify a public-wedding sitemap using the assigned public URL.
+- [x] Check the real account dashboard, existing published wedding details, and public page link.
+- [ ] Complete new-email signup verification — existing account verified through a managed session; email confirmation and password sign-in require the user's own interaction.
+- [ ] Confirm the public deployment serves the wedding — publication requested; the last live-address check returned 404.
 
 # Couple admin and payment review
 - [x] Add private wedding drafts and an explicit publish step for details, stories, dreams, and gifts.
