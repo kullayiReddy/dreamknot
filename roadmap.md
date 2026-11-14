@@ -1,4 +1,7 @@
 # Payment payout review
+- [ ] Add paid-gift payout history with truthful bank settlement status.
+- [ ] Add an owner-only bank payout request page; requests do not initiate bank transfers.
+- [ ] Connect a custom domain — awaiting the domain name.
 - [x] Trace how guest payments reach the couple and identify missing payout setup or dashboard information.
 - [x] Check the complete payment status flow upfront and report anything not verified with a real transaction.
 
