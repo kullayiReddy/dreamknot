@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { generateWeddingWriting } from "@/lib/wedding-writing.functions";
-import type { WritingInput } from "@/lib/wedding-writing";
+import { makeWritingRequest, type WritingInput } from "@/lib/wedding-writing";
 
 type Props = {
   weddingId: string; names: string; date: string; place: string;
@@ -28,10 +28,7 @@ export function WritingAssistant(props: Props) {
   async function write() {
     setBusy(true); setError("");
     try {
-      const result = await generate({ data: {
-        weddingId: props.weddingId, names: props.names, date: props.date, place: props.place,
-        kind: props.kind, title: props.title ?? "", existing: props.existing, details, tone,
-      } });
+      const result = await generate({ data: makeWritingRequest(props, details, tone) });
       if (result.error) setError(result.error); else setDraft(result.text);
     } catch { setError("We couldn’t create a draft. Check your connection and sign-in, then try again."); }
     finally { setBusy(false); }

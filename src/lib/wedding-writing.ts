@@ -15,6 +15,14 @@ export const writingSchema = z.object({
 });
 export type WritingInput = z.infer<typeof writingSchema>;
 
+// Project only serializable fields; UI callbacks must never enter the RPC payload.
+export function makeWritingRequest(input: Pick<WritingInput, "weddingId" | "names" | "date" | "place" | "kind" | "existing"> & { title?: string }, details: string, tone: WritingInput["tone"]): WritingInput {
+  return {
+    weddingId: input.weddingId, names: input.names, date: input.date, place: input.place,
+    kind: input.kind, title: input.title ?? "", existing: input.existing, details, tone,
+  };
+}
+
 export function assertWeddingOwner(ownerId: string | undefined, userId: string) {
   if (!ownerId || ownerId !== userId) throw new Error("You can only write for your own wedding page.");
 }
