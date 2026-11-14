@@ -16,8 +16,10 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: "Pricing — DreamKnot" },
       { property: "og:description", content: "Simple per-wedding pricing for couples." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/pricing" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/pricing" }],
   }),
   component: () => (
     <section className="mx-auto max-w-6xl px-6 py-24">

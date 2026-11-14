@@ -1,3 +1,8 @@
+# Search visibility and real-account verification
+- [ ] Add specific public-page metadata and wedding canonicals; exclude private screens from search.
+- [ ] Install a public-wedding sitemap once a published public URL exists.
+- [ ] Check the real account dashboard and publish the chosen wedding after receiving its details.
+
 # Couple admin and payment review
 - [x] Add private wedding drafts and an explicit publish step for details, stories, dreams, and gifts.
 - [x] Add owner-only pending-payment approval backed by captured Razorpay payment verification.

@@ -10,8 +10,10 @@ export const Route = createFileRoute("/explore")({
       { property: "og:title", content: "Explore Weddings — DreamKnot" },
       { property: "og:description", content: "Browse public DreamKnot wedding pages." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/explore" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/explore" }],
   }),
   component: () => (
     <section className="mx-auto max-w-6xl px-6 py-24">

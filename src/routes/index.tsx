@@ -12,13 +12,15 @@ import { plans } from "./pricing";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DreamKnot — Make Their Dreams the Greatest Gift" },
-      { name: "description", content: "Couples create a wedding page; guests contribute to honeymoons, homes and collaborative gifts." },
-      { property: "og:title", content: "DreamKnot — Make Their Dreams the Greatest Gift" },
-      { property: "og:description", content: "Wedding gifting for dream experiences and collaborative gifts." },
+      { title: "DreamKnot — Wedding Gift Registry & Honeymoon Funds" },
+      { name: "description", content: "Create a personalized wedding gift registry with DreamKnot. Share honeymoon dreams and group gifts with guests and track their contributions." },
+      { property: "og:title", content: "DreamKnot — Wedding Gift Registry & Honeymoon Funds" },
+      { property: "og:description", content: "Create a personalized wedding gift registry, share honeymoon dreams and group gifts, and celebrate contributions from family and friends." },
+      { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });

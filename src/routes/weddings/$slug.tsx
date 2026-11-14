@@ -24,10 +24,15 @@ export const Route = createFileRoute("/weddings/$slug")({
       gifts: items.filter((i) => i.kind === "gift").map((i) => ({ id: i.id, name: i.title, category: i.category || "Group gift", target: i.target, raised: i.raised, contributors: i.contributors, organizer: w.names, description: i.description })),
     };
   },
-  head: ({ loaderData }) => {
-    const t = loaderData ? `${loaderData.names} — DreamKnot` : "Wedding — DreamKnot";
-    const d = loaderData ? `Celebrate ${loaderData.names} by contributing to their dreams and gifts.` : "A DreamKnot wedding page.";
-    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, ...(loaderData?.image.startsWith("https://") ? [{ property: "og:image", content: loaderData.image }, { name: "twitter:image", content: loaderData.image }] : [])] };
+  head: ({ loaderData, params }) => {
+    const t = loaderData ? `${loaderData.names} — Wedding Gift Registry | DreamKnot` : "Wedding unavailable — DreamKnot";
+    const celebration = loaderData ? [loaderData.date, loaderData.place].filter(Boolean).join(" · ") : "";
+    const d = loaderData ? `Celebrate ${loaderData.names}${celebration ? ` (${celebration})` : ""}. Explore their wedding gift registry and contribute to their dreams and group gifts.` : "This wedding page is not available.";
+    const path = `/weddings/${encodeURIComponent(params.slug)}`;
+    return {
+      meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }, { property: "og:url", content: path }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, ...(!loaderData || loaderData.demo ? [{ name: "robots", content: "noindex, follow" }] : []), ...(loaderData?.image.startsWith("https://") ? [{ property: "og:image", content: loaderData.image }, { name: "twitter:image", content: loaderData.image }] : [])],
+      links: [{ rel: "canonical", href: path }],
+    };
   },
   component: WeddingPage,
 });
