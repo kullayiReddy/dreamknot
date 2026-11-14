@@ -33,3 +33,4 @@ use the editor.
 - Generate wedding copy through authenticated server functions that verify wedding ownership before calling the AI Gateway SDK; explicit draft approval prevents AI from silently replacing saved copy.
 - Store couple edits in owner-only wedding drafts and publish them atomically; payment approvals and refunds must verify wedding ownership and Razorpay state before privileged writes.
 - Derive static sitemap paths from required route decisions and paginate published weddings with session-free public access; omit lastmod without a page-specific content timestamp so private drafts and invented dates never enter search.
+- Payout requests are owner-verified, bank details are server-encrypted, and one active request per contribution is reserved atomically; only independently verified transfers may populate settlement dates, never guest-payment confirmations.
