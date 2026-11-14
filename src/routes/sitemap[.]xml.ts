@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouterInstance } from "@tanstack/react-start";
 import { isSitemapRouteIncluded, sitemapPathForLocation, sitemapStaticPaths, sitemapXML, type SitemapEntry } from "@/lib/sitemap";
 
-const BASE_URL = "https://create-and-grow-bot.lovable.app";
+const BASE_URL = "https://dreamknot.lovable.app";
 export const Route = createFileRoute("/sitemap.xml")({
   staticData: { sitemap: false },
   server: { handlers: { GET: async () => {

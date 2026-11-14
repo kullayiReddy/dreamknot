@@ -26,8 +26,8 @@ describe("public wedding sitemap", () => {
     await expect(publicWeddingSlugs(mock.client)).rejects.toThrow("source unavailable");
   });
   it("does not invent content modification dates", () => {
-    const xml = sitemapXML("https://create-and-grow-bot.lovable.app", [{ path: "/weddings/first" }]);
-    expect(xml).toContain("https://create-and-grow-bot.lovable.app/weddings/first");
+    const xml = sitemapXML("https://dreamknot.lovable.app", [{ path: "/weddings/first" }]);
+    expect(xml).toContain("https://dreamknot.lovable.app/weddings/first");
     expect(xml).not.toContain("lastmod");
   });
 });
