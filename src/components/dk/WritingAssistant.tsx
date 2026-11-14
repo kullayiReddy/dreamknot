@@ -28,7 +28,10 @@ export function WritingAssistant(props: Props) {
   async function write() {
     setBusy(true); setError("");
     try {
-      const result = await generate({ data: { ...props, title: props.title ?? "", details, tone } });
+      const result = await generate({ data: {
+        weddingId: props.weddingId, names: props.names, date: props.date, place: props.place,
+        kind: props.kind, title: props.title ?? "", existing: props.existing, details, tone,
+      } });
       if (result.error) setError(result.error); else setDraft(result.text);
     } catch { setError("We couldn’t create a draft. Check your connection and sign-in, then try again."); }
     finally { setBusy(false); }
