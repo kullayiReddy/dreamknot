@@ -26,7 +26,7 @@ const faqs = [
   ["Can guests contribute any amount?", "Yes. Couples can suggest amounts, but guests are free to give what feels right."],
   ["What happens to money raised for a gift?", "Collaborative gift funds are used to purchase the approved gift — organisers can't withdraw them freely."],
   ["Is online payment live?", "Not yet. Secure payments are being added; the sample page shows how it will work."],
-];
+] as const;
 
 function Home() {
   return (
