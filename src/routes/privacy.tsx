@@ -30,7 +30,7 @@ function Privacy() {
           <p>DreamKnot uses browser storage to keep your sign-in session available and protect account-only pages. This is separate from Lovable’s cookie-free visitor analytics. Razorpay may use its own browser storage or cookies when its checkout opens.</p>
         </PolicySection>
         <PolicySection title="6. How information is used and shared">
-          <p>Information is used to operate accounts and wedding pages, display published content, process and confirm contributions, prevent misuse, provide support, meet legal obligations, and improve the service. Published wedding details, dreams, gifts, progress, and guest messages are visible to people viewing the couple’s page; couples should not publish sensitive information.</p>
+          <p>Information is used to operate accounts and wedding pages, display published content, process and confirm contributions, prevent misuse, provide support, meet legal obligations, and improve the service. Published wedding details, dreams, gifts, and progress are visible to people viewing the couple’s page; guest names, messages, and contribution records are visible to the couple in their dashboard. Couples should not publish sensitive information.</p>
           <p>Service providers process information only for their respective functions: Lovable Cloud for hosting, authentication and data storage, Razorpay for payments, Lovable’s AI Gateway for requested writing, and Google when Google sign-in is selected. Information may also be disclosed where required by law.</p>
         </PolicySection>
         <PolicySection title="7. Retention and deletion">

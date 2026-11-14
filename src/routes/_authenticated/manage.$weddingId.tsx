@@ -144,7 +144,12 @@ function Manage() {
             {contribs.map((c) => (
               <li key={c.id} className="flex justify-between gap-4 py-3 text-sm">
                 <div><p className="font-medium">{c.guest_name} · {(c as any).items?.title}</p>{c.message && <p className="text-muted-foreground">“{c.message}”</p>}</div>
-                <div className="text-right"><p>{formatINR(c.amount)}</p><p className={`text-xs ${c.status === "paid" ? "text-gold" : "text-muted-foreground"}`}>{c.status}</p></div>
+                <div className="text-right">
+                  <p>{formatINR(c.amount)}</p>
+                  <p className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${c.status === "paid" ? "bg-gold/15 text-foreground" : "bg-muted text-muted-foreground"}`}>{c.status === "paid" ? "Confirmed" : c.status === "failed" ? "Failed" : "Pending"}</p>
+                  {c.provider_payment_id && <p className="mt-1 max-w-44 break-all text-xs text-muted-foreground">Ref. {c.provider_payment_id}</p>}
+                  {c.paid_at && <p className="mt-1 text-xs text-muted-foreground">{new Date(c.paid_at).toLocaleString("en-IN")}</p>}
+                </div>
               </li>
             ))}
           </ul>
