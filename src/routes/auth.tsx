@@ -15,6 +15,7 @@ export const Route = createFileRoute("/auth")({
       { property: "og:description", content: "Create and manage your wedding gifting page." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex, follow" },
     ],
   }),
   component: AuthPage,
