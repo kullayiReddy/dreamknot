@@ -109,7 +109,7 @@ export const refreshRefund = createServerFn({ method: "POST" })
     const body = await response.json() as ProviderRefund | { items?: ProviderRefund[] };
     const providerRefund = "id" in body
       ? body
-      : body.items?.find((item) => item.id === refund.provider_refund_id || item.notes?.dreamknot_refund_id === refund.id);
+      : body.items?.find((item) => item.id === refund.provider_refund_id || item.notes?.["dreamknot_refund_id"] === refund.id);
     if (!providerRefund) return { status: refund.status, found: false };
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");

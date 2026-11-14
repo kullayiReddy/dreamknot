@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/manage/$weddingId")({
   component: Manage,
 });
 
-const blankItem = { kind: "dream" as const, title: "", category: "", description: "", image_url: "", target: "" };
+const blankItem: { kind: "dream" | "gift"; title: string; category: string; description: string; image_url: string; target: string } = { kind: "dream", title: "", category: "", description: "", image_url: "", target: "" };
 
 function Manage() {
   const { weddingId } = Route.useParams();
@@ -190,7 +190,7 @@ function Manage() {
         <WritingAssistant weddingId={weddingId} names={draft.details.names} date={draft.details.wedding_date} place={draft.details.place} kind="story" existing={draft.details.story} onApply={(story) => updateDetails({ story })} />
         <label className="flex items-center gap-3 text-sm"><Switch checked={draft.details.published} onCheckedChange={(published) => updateDetails({ published })} /> Make the page visible to guests when these changes are published</label>
         <div className="flex flex-wrap justify-between gap-3 border-t border-border pt-4">
-          <Button type="button" variant="outline" onClick={saveDraft} disabled={!dirty || saving}>Save private draft</Button>
+          <Button type="button" variant="outline" onClick={() => saveDraft()} disabled={!dirty || saving}>Save private draft</Button>
           <div className="flex gap-2"><Button type="button" variant="ghost" disabled={!unpublished || saving || publishing} onClick={resetDraft}>Discard changes</Button><Button type="button" variant="ghost" onClick={removeWedding} className="text-destructive">Delete page</Button></div>
         </div>
       </div>
