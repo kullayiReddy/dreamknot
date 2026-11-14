@@ -37,7 +37,7 @@ function Home() {
   return (
     <>
       <section className="relative isolate min-h-[88vh] overflow-hidden">
-        <img src={hero} alt="Couple on a lakeside terrace at golden hour" width={1600} height={1008} className="hero-arrival absolute inset-0 -z-10 h-full w-full object-cover" />
+        <img src={hero} alt="Couple on a lakeside terrace at golden hour" width={1600} height={1008} className="hero-arrival absolute inset-0 -z-10 h-full w-full object-cover object-top" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-foreground/75 via-foreground/35 to-transparent" />
         <div className="hero-copy mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-6 py-14 text-background">
           <p className="eyebrow fade-up">Tie Dreams. Gift Together.</p>
