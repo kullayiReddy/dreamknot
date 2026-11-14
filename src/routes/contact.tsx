@@ -9,6 +9,7 @@ const topics = [
 ] as const;
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => contentHead("Contact", "Find guidance for DreamKnot wedding pages, guest contributions, privacy requests, and refunds.", "/contact"),
   component: Contact,
 });

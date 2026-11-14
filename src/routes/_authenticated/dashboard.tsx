@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [{ title: "Your weddings — DreamKnot" }, { name: "description", content: "Manage your DreamKnot wedding pages." }, { property: "og:title", content: "Dashboard — DreamKnot" }, { property: "og:description", content: "Manage your wedding pages." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { name: "robots", content: "noindex, follow" }] }),
   component: Dashboard,
 });

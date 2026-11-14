@@ -3,6 +3,7 @@ import { SectionTitle } from "@/components/dk/Site";
 import { couple } from "@/lib/demo";
 
 export const Route = createFileRoute("/explore")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Explore Weddings — DreamKnot" },

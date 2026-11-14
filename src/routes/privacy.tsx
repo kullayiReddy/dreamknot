@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ContentHero, PolicyPage, PolicySection, contentHead } from "@/components/dk/ContentPage";
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: true },
   head: () => contentHead("Privacy Policy", "How DreamKnot handles account, wedding, guest contribution, AI writing, payment, and analytics information.", "/privacy"),
   component: Privacy,
 });
