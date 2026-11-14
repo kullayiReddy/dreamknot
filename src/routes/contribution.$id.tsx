@@ -32,6 +32,8 @@ function StatusPage() {
         <Row k="From" v={data.guestName} />
         {data.paymentRef && <Row k="Payment reference" v={data.paymentRef} />}
         {data.paidAt && <Row k="Paid on" v={new Date(data.paidAt).toLocaleString("en-IN")} />}
+        {data.refundedAmount > 0 && <Row k="Refund initiated" v={formatINR(data.refundedAmount)} />}
+        {data.refundedAmount > 0 && <p className="border-t border-border pt-3 text-xs leading-relaxed text-muted-foreground">An approved refund is being returned to the original payment method. The credit date depends on Razorpay and your bank.</p>}
       </div>
       {data.slug && <Link to="/weddings/$slug" params={{ slug: data.slug }} className="mt-8 inline-block text-sm underline">Back to {data.couple}</Link>}
     </section>

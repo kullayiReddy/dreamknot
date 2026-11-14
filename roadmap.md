@@ -1,3 +1,9 @@
+# Couple admin and payment review
+- [x] Add private wedding drafts and an explicit publish step for details, stories, dreams, and gifts.
+- [x] Add owner-only pending-payment approval backed by captured Razorpay payment verification.
+- [x] Add manual full and partial refunds with reasons, audit records, and refund status display.
+- [x] Add rule tests and verify draft isolation, payment controls, and public pages end to end.
+
 # Information pages and live payments
 - [x] Build About, Contact, Terms, Privacy, and Refund Policy pages in the existing visual style.
 - [x] Link all five pages from the footer and verify their metadata and navigation.

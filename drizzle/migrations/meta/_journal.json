@@ -8,6 +8,13 @@
       "when": 1794624127571,
       "tag": "0000_weddings_items_contributions",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794631591084,
+      "tag": "0001_private_wedding_drafts_and_payment_admin",
+      "breakpoints": true
     }
   ]
 }

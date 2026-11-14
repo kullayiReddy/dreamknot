@@ -12,11 +12,11 @@ function Privacy() {
       <ContentHero eyebrow="Your information" title="Privacy Policy" intro="This notice explains what DreamKnot collects, why it is used, which services process it, and the choices available to couples and guests." />
       <PolicyPage updated="14 November 2026">
         <PolicySection title="1. Information you provide">
-          <p>Couples provide account sign-in information and wedding details such as names, a date and place, a story, image links, dreams, gifts, target amounts, and publication settings. If Google sign-in is selected, Google supplies the account information needed to authenticate you.</p>
+          <p>Couples provide account sign-in information and wedding details such as names, a date and place, a story, image links, dreams, gifts, target amounts, and publication settings. Private drafts remain visible only to the owning account until published. If Google sign-in is selected, Google supplies the account information needed to authenticate you.</p>
           <p>Guests provide a name, contribution amount, and optional email address and message. DreamKnot stores the contribution status and Razorpay order and payment references so the guest and couple can confirm the payment.</p>
         </PolicySection>
         <PolicySection title="2. Payment information">
-          <p>Razorpay processes payment credentials directly through its checkout. DreamKnot does not store your full card number, CVV, UPI PIN, net-banking password, or one-time password. Razorpay and your bank handle information under their own privacy terms.</p>
+          <p>Razorpay processes payment credentials directly through its checkout. DreamKnot does not store your full card number, CVV, UPI PIN, net-banking password, or one-time password. Payment reviews and approved refunds store the reviewer, reason, amount, status, and provider references so couples and guests can track them. Razorpay and your bank handle information under their own privacy terms.</p>
         </PolicySection>
         <PolicySection title="3. AI writing">
           <p>When a couple chooses to generate a story or gift description, the wedding details, selected tone, and existing draft they submit are sent to Lovable’s AI Gateway to produce a draft. A generated draft is shown for editing and is not used as saved page copy until the couple explicitly applies and saves it.</p>

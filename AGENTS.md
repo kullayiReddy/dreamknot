@@ -31,3 +31,4 @@ use the editor.
 
 - Keep viewport entrance animations in the shared MotionLayout with CSS motion tokens; this preserves visible SSR content and respects reduced-motion preferences without new animation dependencies.
 - Generate wedding copy through authenticated server functions that verify wedding ownership before calling the AI Gateway SDK; explicit draft approval prevents AI from silently replacing saved copy.
+- Store couple edits in owner-only wedding drafts and publish them atomically; payment approvals and refunds must verify wedding ownership and Razorpay state before privileged writes.

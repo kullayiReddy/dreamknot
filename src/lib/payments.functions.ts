@@ -26,7 +26,7 @@ export const createContributionOrder = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { id, secret } = keys();
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: item } = await supabaseAdmin.from("items").select("id, title, wedding_id, weddings!inner(published, names)").eq("id", data.itemId).maybeSingle();
+    const { data: item } = await supabaseAdmin.from("items").select("id, title, wedding_id, weddings!inner(published, names)").eq("id", data.itemId).eq("archived", false).maybeSingle();
     if (!item || !(item as any).weddings?.published) throw new Error("This gift is not available.");
     const { data: c, error } = await supabaseAdmin.from("contributions").insert({
       wedding_id: item.wedding_id, item_id: item.id, amount: data.amount,
@@ -68,11 +68,13 @@ export const getContributionStatus = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: c } = await supabaseAdmin.from("contributions")
-      .select("id, amount, status, guest_name, created_at, paid_at, provider_payment_id, items(title), weddings(names, slug)")
+      .select("id, amount, status, guest_name, created_at, paid_at, provider_payment_id, items(title), weddings(names, slug), refunds(amount, status)")
       .eq("id", data.id).maybeSingle();
     if (!c) return null;
+    const refunds = ((c as any).refunds ?? []) as Array<{ amount: number; status: string }>;
+    const refundedAmount = refunds.filter((refund) => ["pending", "processed"].includes(refund.status)).reduce((sum, refund) => sum + refund.amount, 0);
     return {
-      id: c.id, amount: c.amount, status: c.status, guestName: c.guest_name, paidAt: c.paid_at, paymentRef: c.provider_payment_id,
+      id: c.id, amount: c.amount, status: c.status, guestName: c.guest_name, paidAt: c.paid_at, paymentRef: c.provider_payment_id, refundedAmount,
       itemTitle: (c as any).items?.title as string, couple: (c as any).weddings?.names as string, slug: (c as any).weddings?.slug as string,
     };
   });
