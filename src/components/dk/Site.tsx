@@ -25,7 +25,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Logo />
-        <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
+        <nav className="site-nav hidden gap-8 text-sm text-muted-foreground md:flex">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} className="transition-colors hover:text-foreground" activeProps={{ className: "text-foreground" }}>
               {n.label}
@@ -75,14 +75,14 @@ export function Footer() {
 export function ProgressBar({ value }: { value: number }) {
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
-      <div className="h-full rounded-full bg-gold transition-all duration-700" style={{ width: `${value}%` }} />
+      <div data-motion="progress" className="progress-fill h-full rounded-full bg-gold" style={{ width: `${value}%` }} />
     </div>
   );
 }
 
 export function SectionTitle({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
-    <div className="mx-auto mb-12 max-w-2xl text-center">
+    <div data-motion="reveal" className="mx-auto mb-12 max-w-2xl text-center">
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="mt-3 text-4xl md:text-5xl">{title}</h2>
       {sub && <p className="mt-4 text-muted-foreground">{sub}</p>}
