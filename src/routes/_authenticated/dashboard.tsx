@@ -32,7 +32,7 @@ function Dashboard() {
     const base = slugify(names) || "wedding";
     const slug = `${base}-${Math.random().toString(36).slice(2, 6)}`;
     const { data, error } = await supabase.from("weddings").insert({ names, slug }).select("id").single();
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["my-weddings"] });
     navigate({ to: "/manage/$weddingId", params: { weddingId: data.id } });
   }

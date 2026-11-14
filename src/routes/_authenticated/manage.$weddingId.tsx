@@ -43,21 +43,21 @@ function Manage() {
 
   async function save() {
     const { error } = await supabase.from("weddings").update(form).eq("id", weddingId);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Saved"); refresh();
   }
   async function addItem(e: React.FormEvent) {
     e.preventDefault();
     const target = Number(item.target);
-    if (!target || target < 1) return toast.error("Enter a target amount");
+    if (!target || target < 1) { toast.error("Enter a target amount"); return; }
     const { error } = await supabase.from("items").insert({ ...item, target, wedding_id: weddingId });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setItem({ kind: "dream", title: "", category: "", description: "", image_url: "", target: "" }); refresh();
   }
   async function removeItem(id: string) {
     if (!confirm("Remove this item?")) return;
     const { error } = await supabase.from("items").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     refresh();
   }
   async function removeWedding() {

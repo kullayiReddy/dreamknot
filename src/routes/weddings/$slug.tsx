@@ -55,9 +55,9 @@ function WeddingPage() {
   const open = (id: string, title: string, suggested = [2100, 5100, 11000]) => { setTarget({ id, title, suggested }); setAmount(""); };
 
   async function pay() {
-    if (!target || !amount) return;
-    if (amount < 100) return toast.error("Minimum contribution is ₹100");
-    if (!guest.name.trim()) return toast.error("Please enter your name");
+    if (!target || !amount) return undefined;
+    if (amount < 100) { toast.error("Minimum contribution is ₹100"); return; }
+    if (!guest.name.trim()) { toast.error("Please enter your name"); return; }
     setBusy(true);
     try {
       const ok = await loadCheckout();
