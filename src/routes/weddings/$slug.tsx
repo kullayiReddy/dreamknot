@@ -21,7 +21,7 @@ export const Route = createFileRoute("/weddings/$slug")({
     return {
       demo: false, names: w.names, date: w.wedding_date, place: w.place, story: w.story, image: w.cover_url || hero,
       dreams: items.filter((i) => i.kind === "dream").map((i) => ({ id: i.id, title: i.title, category: i.category, image: i.image_url || hero, target: i.target, raised: i.raised, description: i.description, suggested: [2100, 5100, 11000] })),
-      gifts: items.filter((i) => i.kind === "gift").map((i) => ({ id: i.id, name: i.title, category: i.category || "Group gift", target: i.target, raised: i.raised, contributors: i.contributors, organizer: w.names })),
+      gifts: items.filter((i) => i.kind === "gift").map((i) => ({ id: i.id, name: i.title, category: i.category || "Group gift", target: i.target, raised: i.raised, contributors: i.contributors, organizer: w.names, description: i.description })),
     };
   },
   head: ({ loaderData }) => {

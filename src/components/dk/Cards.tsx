@@ -13,6 +13,7 @@ export function DreamCard({ d, onContribute }: { d: Dream; onContribute?: () => 
       <div className="space-y-3 p-6">
         <p className="eyebrow">{d.category}</p>
         <h3 className="text-2xl">{d.title}</h3>
+        {d.description && <p className="text-sm leading-relaxed text-muted-foreground">{d.description}</p>}
         <ProgressBar value={p} />
         <div className="flex justify-between text-sm text-muted-foreground">
           <span>{formatINR(d.raised)} of {formatINR(d.target)}</span><span>{p}%</span>
@@ -38,6 +39,7 @@ export function GiftCard({ g, onContribute }: { g: Gift; onContribute?: () => vo
       </div>
       <h3 className="mt-5 text-2xl">{g.name}</h3>
       <p className="mt-1 text-sm text-muted-foreground">Organised by {g.organizer}</p>
+      {g.description && <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{g.description}</p>}
       <div className="mt-5"><ProgressBar value={p} /></div>
       <div className="mt-2 flex justify-between text-sm text-muted-foreground">
         <span>{formatINR(g.raised)} of {formatINR(g.target)}</span>
