@@ -22,7 +22,7 @@ export function PaymentPayoutInfo() {
       <div className="mt-5 rounded-xl bg-background px-4 py-3 text-sm">
         {setupQuery.isLoading ? <span className="text-muted-foreground">Checking payment mode…</span> : setupQuery.isError ? <span className="text-destructive">Payment mode could not be checked.</span> : !setup?.configured ? <span className="font-medium text-destructive">Payments are not configured.</span> : setup.live ? <span><span className="font-medium">Live mode.</span> Real payments and settlements are handled by Razorpay.</span> : <span><span className="font-medium">Test mode.</span> No real money or bank payout will be made until live Razorpay keys are configured.</span>}
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">“Net received” in DreamKnot is a contribution total after recorded refunds, not your available bank balance. Check Razorpay for KYC approval, bank details, fees, and settlement status.</p>
+      <p className="mt-3 text-xs text-muted-foreground">All contributions use the single Razorpay account configured for DreamKnot; separate bank onboarding for each couple is not currently available. “Net received” is a contribution total after recorded refunds, not your available bank balance. Check Razorpay for KYC approval, bank details, fees, and settlement status.</p>
     </section>
   );
 }
