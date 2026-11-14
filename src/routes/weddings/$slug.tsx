@@ -99,7 +99,7 @@ function WeddingPage() {
         <div className="flex h-full flex-col items-center justify-end pb-16 text-center text-background">
           <p className="eyebrow">{[p.date, p.place].filter(Boolean).join(" · ")}</p>
           <h1 className="fade-up mt-3 text-6xl md:text-8xl">{p.names}</h1>
-          {!p.demo && <Link to="/weddings/$slug_/profile" params={{ slug }} className="motion-button mt-6 rounded-full border border-background/60 px-5 py-2 text-sm text-background hover:bg-background/10">Meet the couple</Link>}
+          {!p.demo && <Link to="/weddings/$slug/profile" params={{ slug }} className="motion-button mt-6 rounded-full border border-background/60 px-5 py-2 text-sm text-background hover:bg-background/10">Meet the couple</Link>}
         </div>
       </section>
       {p.story && <p className="mx-auto max-w-2xl px-6 py-16 text-center font-serif text-2xl leading-relaxed">“{p.story}”</p>}

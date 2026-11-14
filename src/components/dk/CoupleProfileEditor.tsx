@@ -68,7 +68,7 @@ export function CoupleProfileEditor({ weddingId, slug, fallbackName, published }
           <h2 className="mt-1 text-3xl">About you</h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">Add your real names, location, and social links. Saving here updates your couple profile; guests can open it from your wedding page.</p>
         </div>
-        {published && <Button asChild variant="ghost" size="sm"><Link to="/weddings/$slug_/profile" params={{ slug }}>View profile</Link></Button>}
+        {published && <Button asChild variant="ghost" size="sm"><Link to="/weddings/$slug/profile" params={{ slug }}>View profile</Link></Button>}
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2"><Label htmlFor="profile-name">Your real names</Label><Input id="profile-name" required value={form.display_name} onChange={(event) => update("display_name", event.target.value)} /></div>
