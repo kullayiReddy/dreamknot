@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 function keys() {
   const id = process.env["RAZORPAY_KEY_ID"];
@@ -14,6 +15,14 @@ async function hmacHex(secret: string, msg: string) {
 }
 
 type OrderInput = { itemId: string; amount: number; guestName: string; guestEmail: string; message: string };
+
+export const getPaymentSetup = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async () => {
+    const id = process.env["RAZORPAY_KEY_ID"];
+    const secret = process.env["RAZORPAY_KEY_SECRET"];
+    return { configured: Boolean(id && secret), live: Boolean(id?.startsWith("rzp_live_")) };
+  });
 
 export const createContributionOrder = createServerFn({ method: "POST" })
   .inputValidator((i: OrderInput) => {
