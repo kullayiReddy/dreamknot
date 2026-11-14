@@ -42,10 +42,7 @@ function AccountButtons() {
   const { session, ready } = useSession();
   if (!ready) return <div className="w-32" />;
   if (!session) return (
-    <div className="flex items-center gap-3">
-      <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground">Sign in</Link>
-      <Button asChild size="sm" className="rounded-full px-5"><Link to="/auth">Create your page</Link></Button>
-    </div>
+    <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground">Sign in</Link>
   );
   return (
     <div className="flex items-center gap-3">
